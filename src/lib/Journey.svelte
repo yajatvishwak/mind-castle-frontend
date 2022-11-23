@@ -17,8 +17,10 @@
   let isTherapistModalOpen = false;
   let isTherapistDetailModalOpen = false;
   let isEditVisibilityModalOpen = false;
+  let isAddModalOpen = false;
   let isOwner = false;
-
+  let storyContent = "";
+  let comment = "";
   let data = {
     title: "My Journey towards getting placed",
     author: "Andrew Tate",
@@ -27,7 +29,7 @@
     visibility: "public",
     sharedWith: ["dannyboi", "dannyboi2"],
     validity: {
-      isVerifiedJourney: true,
+      isVerifiedJourney: false,
       therapist: {
         name: "String",
         tno: "String",
@@ -117,6 +119,45 @@
   }
 </script>
 
+<input type="checkbox" class="modal-toggle" checked={isAddModalOpen} />
+<div class="modal modal-bottom sm:modal-middle">
+  <div class="modal-box relative ">
+    <button
+      on:click={() => (isAddModalOpen = false)}
+      class="btn btn-sm btn-circle absolute right-2 top-2"
+    >
+      ✕
+    </button>
+    <div class="flex flex-col">
+      <h3 class="text-lg font-bold">Add a Story to your Journey</h3>
+      <div class="flex flex-col gap-2 my-2">
+        <div class="mt-3 text-sm opacity-60">Thought Starters:</div>
+        <div class="flex text-sm flex-col gap-2">
+          <div>> What made you feel nice or sad today?</div>
+          <div>> An experience you would like to share</div>
+          <div>> Something you could do differently today</div>
+        </div>
+        <textarea
+          type="text"
+          rows="6"
+          class=" textarea-bordered textarea w-full mt-3"
+          placeholder="What happened today?"
+          name=""
+          id=""
+          bind:value={storyContent}
+        />
+
+        <button
+          on:click={() => {
+            // TODO : call update
+          }}
+          class="btn bg-indigo-500 mt-2 text-white">Add to journey</button
+        >
+      </div>
+    </div>
+  </div>
+</div>
+
 <input
   type="checkbox"
   class="modal-toggle"
@@ -155,11 +196,44 @@
       ✕
     </button>
     <h3 class="text-lg font-bold">Are you a verified Therapist?</h3>
-    <p class="py-4">
+    <div class="py-4">
       As a mission to keep the platform moderated, we allow therapists like you
       to verify this journey. If you feel that this journey resonates with you
       and could help others, go ahead and verify it!
-    </p>
+    </div>
+    <form class="mt-2">
+      <div class="label-text">Your Display name</div>
+      <input
+        type="text"
+        bind:value={data.validity.therapist.name}
+        class="input input-bordered w-full mt-2"
+        name=""
+        id=""
+      />
+      <div class="label-text mt-3">Certification Number</div>
+      <input
+        bind:value={data.validity.therapist.tno}
+        type="text"
+        class="input input-bordered w-full mt-2"
+        name=""
+        id=""
+      />
+      <div class="label-text mt-3">Contact Link</div>
+      <input
+        bind:value={data.validity.therapist.contactLink}
+        type="text"
+        class="input input-bordered w-full mt-2"
+        name=""
+        id=""
+      />
+      <button
+        on:click={() => {
+          // TODO: call update
+        }}
+        type="submit"
+        class="btn bg-indigo-500 mt-3 w-full border-0">Verify Journey</button
+      >
+    </form>
   </div>
 </div>
 <input
@@ -219,9 +293,10 @@
   </div>
 </div>
 <section
-  class="bg-slate-100 w-screen h-full flex flex-col dark:bg-slate-900 p-10 min-h-screen mx-auto max-w-lg"
+  class="bg-slate-100 relative w-screen h-full flex flex-col dark:bg-slate-900 p-10 min-h-screen mx-auto max-w-lg"
 >
   <Navbar />
+
   <div class="font-bold mt-7 text-2xl">{data.title}</div>
   <div class="flex items-center justify-between mt-2">
     <div class="">by <b>{data.author}</b></div>
@@ -235,7 +310,7 @@
       {data.textSummary}
     </div>
   {/if} -->
-  <div class="flex gap-2 items-center">
+  <div class="flex  flex-col">
     {#if data.validity.isVerifiedJourney}
       <button
         on:click={() => (isTherapistDetailModalOpen = true)}
@@ -250,13 +325,23 @@
         Unverified Journey
       </button>
     {/if}
+
     {#if isOwner}
-      <button
-        on:click={() => (isEditVisibilityModalOpen = true)}
-        class="rounded-full px-2 py-1 border-2 w-fit text-xs mt-2 border-gray-600"
-      >
-        Edit journey
-      </button>
+      <div class="divider text-xs">Owner Controls</div>
+      <div class="flex gap-2">
+        <button
+          on:click={() => (isEditVisibilityModalOpen = true)}
+          class="rounded-full px-2 py-1 border-2 w-fit text-xs  border-gray-600"
+        >
+          Edit journey
+        </button>
+        <button
+          on:click={() => (isAddModalOpen = true)}
+          class="rounded-full px-2 py-1 border-2 w-fit text-xs  border-gray-600"
+        >
+          Add Story
+        </button>
+      </div>
     {/if}
   </div>
 
@@ -328,6 +413,7 @@
     <div class="opacity-50">Public Comments</div>
     <form class="mt-4">
       <textarea
+        bind:value={comment}
         type="text"
         placeholder="Your ten cents here..."
         class="textarea w-full textarea-bordered bg-transparent"
@@ -336,7 +422,10 @@
         id=""
       />
       <button
-        on:click={() => {}}
+        on:click={() => {
+          // TODO : integration insert
+          // TODO: call update
+        }}
         class="btn w-full bg-indigo-500 text-white"
         type="submit">Submit</button
       >

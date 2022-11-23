@@ -32,12 +32,16 @@
       {#if col.type === "current"}
         {#if Object.keys(mood).includes(col.date + "")}
           {#if mood[col.date] === "happy"}
-            <div class="p-2 rounded-full bg-green-900 text-center text-xs ">
+            <div
+              class="p-2 rounded-full dark:bg-green-900 bg-green-200 text-center text-xs "
+            >
               😁
             </div>
           {/if}
           {#if mood[col.date] === "sad"}
-            <div class="p-2 rounded-full bg-red-900 text-center text-xs ">
+            <div
+              class="p-2 rounded-full dark:bg-red-900  bg-red-200 text-center text-xs "
+            >
               😞
             </div>
           {/if}
