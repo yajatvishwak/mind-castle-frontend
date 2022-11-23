@@ -1,14 +1,8 @@
 <script>
   import { onMount } from "svelte";
   import CalendarDates from "calendar-dates";
-  export const mood = {
-    10: "sad",
-    11: "happy",
-    12: "sad",
-    13: "sad",
-    14: "sad",
-  };
-
+  export let mood = {};
+  console.log(mood);
   const calendarDates = new CalendarDates();
   let mat = [];
   onMount(async () => {

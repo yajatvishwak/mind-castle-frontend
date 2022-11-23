@@ -27,6 +27,14 @@
     journeyBeginDate: "12 November 2022",
     hasEnded: false,
     visibility: "public",
+    moodboarddata: {}, // does not come from server, calculated on frontend
+    mood: [
+      {
+        date: new Date(),
+        mood: "sad",
+        sentimentScore: 23,
+      },
+    ],
     sharedWith: ["dannyboi", "dannyboi2"],
     validity: {
       isVerifiedJourney: false,
@@ -50,7 +58,7 @@
       { imgurl: "https://avatars.dicebear.com/api/miniavs/5hsr.svg" },
       { imgurl: "https://avatars.dicebear.com/api/miniavs/5hsr.svg" },
     ],
-    isLiked: false,
+    isLiked: false, // check if user in likes array then set to tru else false on Mount
     owner: {
       username: "1234",
     },
@@ -86,6 +94,11 @@
       toast.error("You are not allowed to view this journey");
       pop();
     }
+    // parse dates for mood board
+    for (const mood of data.mood) {
+      data["moodboarddata"][moment(mood.date).date()] = mood.mood;
+    }
+    console.log(data.moodboarddata);
   });
 
   function likeJourney() {
@@ -146,6 +159,8 @@
           id=""
           bind:value={storyContent}
         />
+        <div class="label-text">Add a picture to this story</div>
+        <input type="file" name="" id="" />
 
         <button
           on:click={() => {
@@ -369,7 +384,7 @@
 
   <div class="mt-10">
     <div class="opacity-50">Analysis of mood (Monthly)</div>
-    <HeatMap />
+    <HeatMap mood={data.moodboarddata} />
   </div>
   <div class="mt-10">
     <div class="flex justify-between items-center">
