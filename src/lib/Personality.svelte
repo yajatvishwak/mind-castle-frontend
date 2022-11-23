@@ -107,6 +107,28 @@
       choice: "",
     },
   ];
+  let personalityobj = {
+    ei: {
+      e: 0,
+      i: 0,
+      winner: "",
+    },
+    ns: {
+      n: 0,
+      s: 0,
+      winner: "",
+    },
+    jp: {
+      j: 0,
+      p: 0,
+      winner: "",
+    },
+    tf: {
+      t: 0,
+      f: 0,
+      winner: "",
+    },
+  };
   let selectedTestNumber = 0;
   async function calculatePersonality() {
     let finalPersonality = "";
@@ -120,10 +142,12 @@
         b++;
       }
     }
+    personalityobj.ei.e = a;
+    personalityobj.ei.i = b;
     if (a > b) {
-      finalPersonality += "E";
+      personalityobj.ei.winner = "e";
     } else {
-      finalPersonality += "I";
+      personalityobj.ei.winner = "i";
     }
     a = 0;
     b = 0;
@@ -135,11 +159,14 @@
         b++;
       }
     }
+    personalityobj.ns.s = a;
+    personalityobj.ns.n = b;
     if (a > b) {
-      finalPersonality += "S";
+      personalityobj.ns.winner = "s";
     } else {
-      finalPersonality += "N";
+      personalityobj.ns.winner = "n";
     }
+
     a = 0;
     b = 0;
     let torf = [2, 6, 10, 14, 18];
@@ -150,11 +177,14 @@
         b++;
       }
     }
+    personalityobj.tf.t = a;
+    personalityobj.tf.f = b;
     if (a > b) {
-      finalPersonality += "T";
+      personalityobj.tf.winner = "t";
     } else {
-      finalPersonality += "F";
+      personalityobj.tf.winner = "f";
     }
+
     a = 0;
     b = 0;
     let jorp = [2, 6, 10, 14, 18];
@@ -165,12 +195,20 @@
         b++;
       }
     }
+    personalityobj.jp.j = a;
+    personalityobj.jp.p = b;
     if (a > b) {
-      finalPersonality += "J";
+      personalityobj.jp.winner = "j";
     } else {
-      finalPersonality += "P";
+      personalityobj.jp.winner = "p";
     }
-    toast.success("You are an " + finalPersonality);
+    toast.success(
+      "You are an " +
+        personalityobj.ei.winner +
+        personalityobj.ns.winner +
+        personalityobj.tf.winner +
+        personalityobj.jp.winner
+    );
     // TODO : integration
   }
 </script>
