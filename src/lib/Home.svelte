@@ -72,7 +72,7 @@
 </div>
 
 <section
-  class="bg-slate-100 w-screen h-full flex flex-col dark:bg-slate-900 p-8 min-h-screen"
+  class="bg-slate-100 w-screen h-full flex flex-col dark:bg-slate-900 p-8 min-h-screen mx-auto max-w-lg"
 >
   <Navbar />
   <div class="text-2xl mt-8">Welcome, {data.name}</div>

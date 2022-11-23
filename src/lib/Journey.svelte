@@ -20,7 +20,7 @@
     journeyBeginDate: "12 November 2022",
     hasEnded: false,
     validity: {
-      isVerifiedJourney: false,
+      isVerifiedJourney: true,
       therapist: {
         name: "String",
         tno: "String",
