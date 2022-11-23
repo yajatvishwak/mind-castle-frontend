@@ -20,7 +20,7 @@
     journeyBeginDate: "12 November 2022",
     hasEnded: false,
     validity: {
-      isVerifiedJourney: true,
+      isVerifiedJourney: false,
       therapist: {
         name: "String",
         tno: "String",
@@ -153,11 +153,12 @@
     >
       ✔️ Verified Journey
     </button>{:else}
-    <div
+    <button
+      on:click={() => (isTherapistModalOpen = true)}
       class="rounded-full px-2 py-1 border-dashed border-2 w-fit text-xs mt-2 border-gray-600"
     >
       Unverified Journey
-    </div>
+    </button>
   {/if}
 
   {#if data.hasEnded}
