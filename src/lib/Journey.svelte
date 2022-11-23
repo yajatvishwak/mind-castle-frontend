@@ -37,7 +37,7 @@
     ],
     sharedWith: ["dannyboi", "dannyboi2"],
     validity: {
-      isVerifiedJourney: false,
+      isVerifiedJourney: true,
       therapist: {
         name: "String",
         tno: "String",
