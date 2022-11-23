@@ -202,6 +202,7 @@
     } else {
       personalityobj.jp.winner = "p";
     }
+    console.log(personalityobj);
     toast.success(
       "You are an " +
         personalityobj.ei.winner +

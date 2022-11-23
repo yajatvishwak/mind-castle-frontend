@@ -12,11 +12,21 @@
   import baseurl from "./url.store";
   export let params = {};
   let showSummary = false;
+  let isTherapistModalOpen = false;
+  let isTherapistDetailModalOpen = false;
   let data = {
     title: "My Journey towards getting placed",
     author: "Andrew Tate",
     journeyBeginDate: "12 November 2022",
     hasEnded: false,
+    validity: {
+      isVerifiedJourney: true,
+      therapist: {
+        name: "String",
+        tno: "String",
+        contactLink: "String",
+      },
+    },
     likes: [
       { imgurl: "https://avatars.dicebear.com/api/miniavs/1223.svg" },
       { imgurl: "https://avatars.dicebear.com/api/miniavs/11f3.svg" },
@@ -74,6 +84,51 @@
   }
 </script>
 
+<input
+  type="checkbox"
+  class="modal-toggle"
+  checked={isTherapistDetailModalOpen}
+/>
+<div class="modal modal-bottom sm:modal-middle">
+  <div class="modal-box relative ">
+    <button
+      on:click={() => (isTherapistDetailModalOpen = false)}
+      class="btn btn-sm btn-circle absolute right-2 top-2"
+    >
+      ✕
+    </button>
+    <div class="flex flex-col">
+      <h3 class="text-lg font-bold">{data.validity.therapist.name}</h3>
+      <div class="py-4">
+        <div>This article is verified by the above therapist.</div>
+        <button
+          class="btn btn-outline btn-sm"
+          on:click={() => {
+            window.location.href = data.validity.therapist.contactLink;
+          }}>View Profile</button
+        >
+      </div>
+    </div>
+  </div>
+</div>
+
+<input type="checkbox" class="modal-toggle" checked={isTherapistModalOpen} />
+<div class="modal modal-bottom sm:modal-middle">
+  <div class="modal-box relative">
+    <button
+      on:click={() => (isTherapistModalOpen = false)}
+      class="btn btn-sm btn-circle absolute right-2 top-2"
+    >
+      ✕
+    </button>
+    <h3 class="text-lg font-bold">Are you a verified Therapist?</h3>
+    <p class="py-4">
+      As a mission to keep the platform moderated, we allow therapists like you
+      to verify this journey. If you feel that this journey resonates with you
+      and could help others, go ahead and verify it!
+    </p>
+  </div>
+</div>
 <section
   class="bg-slate-100 w-screen h-full flex flex-col dark:bg-slate-900 p-10 min-h-screen mx-auto max-w-lg"
 >
@@ -91,6 +146,20 @@
       {data.textSummary}
     </div>
   {/if} -->
+  {#if data.validity.isVerifiedJourney}
+    <button
+      on:click={() => (isTherapistDetailModalOpen = true)}
+      class="rounded-full px-2 py-1  border-2 w-fit text-xs mt-2 border-gray-600"
+    >
+      ✔️ Verified Journey
+    </button>{:else}
+    <div
+      class="rounded-full px-2 py-1 border-dashed border-2 w-fit text-xs mt-2 border-gray-600"
+    >
+      Unverified Journey
+    </div>
+  {/if}
+
   {#if data.hasEnded}
     <div class="divider ">Journey Ends</div>
   {/if}
@@ -112,6 +181,7 @@
       Journey Begins - {data.journeyBeginDate}
     </div>
   </div>
+
   <div class="mt-10">
     <div class="opacity-50">Analysis of mood (Monthly)</div>
     <HeatMap />
