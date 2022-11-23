@@ -1,3 +1,13 @@
+<script>
+  export let title = "";
+  export let timeago = "";
+  export let dp = "";
+  export let username = "";
+  export let likes = "";
+  export let comments = "";
+  export let jid = "";
+</script>
+
 <div class="flex rounded-lg flex-col   bg-white p-5 shadow-sm my-2">
   <h4 class="font-semibold text-gray-600  line-clamp-2">
     How to become strong in life ? Lorem, ipsum dolor sit amet consectetur
