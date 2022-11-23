@@ -6,6 +6,8 @@ import Journey from "./lib/Journey.svelte";
 import Add from "./lib/Add.svelte";
 import Edit from "./lib/Edit.svelte";
 import TherapistVerification from "./lib/TherapistVerification.svelte";
+import Profile from "./lib/Profile.svelte";
+import MyPersonality from "./lib/MyPersonality.svelte";
 const routes = {
   "/signin": Signin,
   "/signup": Signup,
@@ -15,5 +17,7 @@ const routes = {
   "/journey/:journeyid": Journey,
   "/add": Add,
   "/edit/:journeyid": Edit,
+  "/profile": Profile,
+  "/mypersonality": MyPersonality,
 };
 export default routes;
