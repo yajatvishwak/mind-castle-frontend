@@ -7,11 +7,13 @@ import Add from "./lib/Add.svelte";
 import Edit from "./lib/Edit.svelte";
 import Chat from "./lib/Chat.svelte";
 import ReadJourney from "./lib/ReadJourney.svelte";
+import MonthlyMoodBoard from "./lib/MonthlyMoodBoard.svelte";
 const routes = {
   "/signin": Signin,
   "/signup": Signup,
   "/personality": Personality,
   "/home": Home,
+  "/monthly-mood": MonthlyMoodBoard,
   "/read-journey": ReadJourney,
   "/troop/chat/:id": Chat,
   "/journey/:journeyid": Journey,
