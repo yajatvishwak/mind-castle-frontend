@@ -6,19 +6,36 @@
   import toast from "svelte-french-toast";
   import CommentCard from "./components/CommentCard.svelte";
   import Likes from "./components/Likes.svelte";
-  import HeatMap from "./HeatMap.svelte";
+  import HeatMap from "./components/HeatMap.svelte";
 
   import Navbar from "./Navbar.svelte";
   import baseurl from "./url.store";
+  import { onMount } from "svelte";
+  import { pop, push } from "svelte-spa-router";
   export let params = {};
   let showSummary = false;
   let isTherapistModalOpen = false;
   let isTherapistDetailModalOpen = false;
+  let isEditVisibilityModalOpen = false;
+  let isAddModalOpen = false;
+  let isOwner = false;
+  let storyContent = "";
+  let comment = "";
   let data = {
     title: "My Journey towards getting placed",
     author: "Andrew Tate",
     journeyBeginDate: "12 November 2022",
     hasEnded: false,
+    visibility: "public",
+    moodboarddata: {}, // does not come from server, calculated on frontend
+    mood: [
+      {
+        date: new Date(),
+        mood: "sad",
+        sentimentScore: 23,
+      },
+    ],
+    sharedWith: ["dannyboi", "dannyboi2"],
     validity: {
       isVerifiedJourney: true,
       therapist: {
@@ -27,13 +44,24 @@
         contactLink: "String",
       },
     },
+    comments: [
+      {
+        commentcontent: `Lorem ipsum dolor, sit amet consectetur adipisicing elit. Provident et
+        facilis incidunt dicta saepe voluptates est autem, repellendus aut sit
+        nisi eligendi quos, earum ad culpa consequatur! Voluptatem, rerum quo. `,
+        commentor: { username: "dannty ultra boi", dp: "" },
+      },
+    ],
     likes: [
       { imgurl: "https://avatars.dicebear.com/api/miniavs/1223.svg" },
       { imgurl: "https://avatars.dicebear.com/api/miniavs/11f3.svg" },
       { imgurl: "https://avatars.dicebear.com/api/miniavs/5hsr.svg" },
+      { imgurl: "https://avatars.dicebear.com/api/miniavs/5hsr.svg" },
     ],
-    isLiked: false,
-
+    isLiked: false, // check if user in likes array then set to tru else false on Mount
+    owner: {
+      username: "1234",
+    },
     // textSummary: `Lorem ipsum dolor, sit amet consectetur adipisicing elit. Provident et
     //     facilis incidunt dicta saepe voluptates est autem, repellendus aut sit
     //     nisi eligendi quos, earum ad culpa consequatur! Voluptatem, rerum quo.`,
@@ -54,8 +82,28 @@
       },
     ],
   };
+  onMount(() => {
+    // TODO: Integration
+    if (data.owner.username === localStorage.getItem("username"))
+      isOwner = true;
+    if (
+      data.visibility === "private" &&
+      !isOwner &&
+      !data.sharedWith.includes(localStorage.getItem("username"))
+    ) {
+      toast.error("You are not allowed to view this journey");
+      pop();
+    }
+    // parse dates for mood board
+    for (const mood of data.mood) {
+      data["moodboarddata"][moment(mood.date).date()] = mood.mood;
+    }
+    console.log(data.moodboarddata);
+  });
+
   function likeJourney() {
     data.isLiked = !data.isLiked;
+    // TODO: update
   }
 
   async function fetchData() {
@@ -83,6 +131,47 @@
     }
   }
 </script>
+
+<input type="checkbox" class="modal-toggle" checked={isAddModalOpen} />
+<div class="modal modal-bottom sm:modal-middle">
+  <div class="modal-box relative ">
+    <button
+      on:click={() => (isAddModalOpen = false)}
+      class="btn btn-sm btn-circle absolute right-2 top-2"
+    >
+      ✕
+    </button>
+    <div class="flex flex-col">
+      <h3 class="text-lg font-bold">Add a Story to your Journey</h3>
+      <div class="flex flex-col gap-2 my-2">
+        <div class="mt-3 text-sm opacity-60">Thought Starters:</div>
+        <div class="flex text-sm flex-col gap-2">
+          <div>> What made you feel nice or sad today?</div>
+          <div>> An experience you would like to share</div>
+          <div>> Something you could do differently today</div>
+        </div>
+        <textarea
+          type="text"
+          rows="6"
+          class=" textarea-bordered textarea w-full mt-3"
+          placeholder="What happened today?"
+          name=""
+          id=""
+          bind:value={storyContent}
+        />
+        <div class="label-text">Add a picture to this story</div>
+        <input type="file" name="" id="" />
+
+        <button
+          on:click={() => {
+            // TODO : call update
+          }}
+          class="btn bg-indigo-500 mt-2 text-white">Add to journey</button
+        >
+      </div>
+    </div>
+  </div>
+</div>
 
 <input
   type="checkbox"
@@ -122,17 +211,107 @@
       ✕
     </button>
     <h3 class="text-lg font-bold">Are you a verified Therapist?</h3>
-    <p class="py-4">
+    <div class="py-4">
       As a mission to keep the platform moderated, we allow therapists like you
       to verify this journey. If you feel that this journey resonates with you
       and could help others, go ahead and verify it!
-    </p>
+    </div>
+    <form class="mt-2">
+      <div class="label-text">Your Display name</div>
+      <input
+        type="text"
+        bind:value={data.validity.therapist.name}
+        class="input input-bordered w-full mt-2"
+        name=""
+        id=""
+      />
+      <div class="label-text mt-3">Certification Number</div>
+      <input
+        bind:value={data.validity.therapist.tno}
+        type="text"
+        class="input input-bordered w-full mt-2"
+        name=""
+        id=""
+      />
+      <div class="label-text mt-3">Contact Link</div>
+      <input
+        bind:value={data.validity.therapist.contactLink}
+        type="text"
+        class="input input-bordered w-full mt-2"
+        name=""
+        id=""
+      />
+      <button
+        on:click={() => {
+          // TODO: call update
+        }}
+        type="submit"
+        class="btn bg-indigo-500 mt-3 w-full border-0">Verify Journey</button
+      >
+    </form>
+  </div>
+</div>
+<input
+  type="checkbox"
+  class="modal-toggle"
+  checked={isEditVisibilityModalOpen}
+/>
+<div class="modal modal-bottom sm:modal-middle">
+  <div class="modal-box relative">
+    <button
+      on:click={() => (isEditVisibilityModalOpen = false)}
+      class="btn btn-sm btn-circle absolute right-2 top-2"
+    >
+      ✕
+    </button>
+    <h3 class="text-lg font-bold">Edit Visibility</h3>
+    <div class="py-4 flex justify-between">
+      <div class="label-text">Make journey private</div>
+      <input
+        type="checkbox"
+        class="toggle toggle-sm"
+        on:change={(e) => {
+          //@ts-ignore
+          if (e.target.checked) {
+            data.visibility = "private";
+          } else {
+            data.visibility = "public";
+          }
+          // TODO: update
+
+          console.log(data.visibility);
+        }}
+        checked={data.visibility === "private"}
+      />
+    </div>
+    <h3 class="text-lg font-bold opacity-30">Sharing your journey with...</h3>
+
+    <div class="py-2 flex gap-3 flex-wrap">
+      {#each data.sharedWith as sharedusername}
+        <div class="border px-2 py-1 rounded-lg text-sm">{sharedusername}</div>
+      {/each}
+      <button
+        on:click={() => {
+          const newusername = prompt("Enter username:");
+          if (newusername) {
+            data.sharedWith.push(newusername);
+            data.sharedWith = [...data.sharedWith];
+            toast.success(newusername + " can now see your journey");
+            // TODO: Call update
+          }
+        }}
+        class="border px-2 py-1 rounded-lg text-sm hover:border-indigo-500 transition-all"
+      >
+        ➕
+      </button>
+    </div>
   </div>
 </div>
 <section
-  class="bg-slate-100 w-screen h-full flex flex-col dark:bg-slate-900 p-10 min-h-screen mx-auto max-w-lg"
+  class="bg-slate-100 relative w-screen h-full flex flex-col dark:bg-slate-900 p-10 min-h-screen mx-auto max-w-lg"
 >
   <Navbar />
+
   <div class="font-bold mt-7 text-2xl">{data.title}</div>
   <div class="flex items-center justify-between mt-2">
     <div class="">by <b>{data.author}</b></div>
@@ -146,20 +325,40 @@
       {data.textSummary}
     </div>
   {/if} -->
-  {#if data.validity.isVerifiedJourney}
-    <button
-      on:click={() => (isTherapistDetailModalOpen = true)}
-      class="rounded-full px-2 py-1  border-2 w-fit text-xs mt-2 border-gray-600"
-    >
-      ✔️ Verified Journey
-    </button>{:else}
-    <button
-      on:click={() => (isTherapistModalOpen = true)}
-      class="rounded-full px-2 py-1 border-dashed border-2 w-fit text-xs mt-2 border-gray-600"
-    >
-      Unverified Journey
-    </button>
-  {/if}
+  <div class="flex  flex-col">
+    {#if data.validity.isVerifiedJourney}
+      <button
+        on:click={() => (isTherapistDetailModalOpen = true)}
+        class="rounded-full px-2 py-1  border-2 w-fit text-xs mt-2 border-gray-600"
+      >
+        ✔️ Verified Journey
+      </button>{:else}
+      <button
+        on:click={() => (isTherapistModalOpen = true)}
+        class="rounded-full px-2 py-1 border-dashed border-2 w-fit text-xs mt-2 border-gray-600"
+      >
+        Unverified Journey
+      </button>
+    {/if}
+
+    {#if isOwner}
+      <div class="divider text-xs">Owner Controls</div>
+      <div class="flex gap-2">
+        <button
+          on:click={() => (isEditVisibilityModalOpen = true)}
+          class="rounded-full px-2 py-1 border-2 w-fit text-xs  border-gray-600"
+        >
+          Edit journey
+        </button>
+        <button
+          on:click={() => (isAddModalOpen = true)}
+          class="rounded-full px-2 py-1 border-2 w-fit text-xs  border-gray-600"
+        >
+          Add Story
+        </button>
+      </div>
+    {/if}
+  </div>
 
   {#if data.hasEnded}
     <div class="divider ">Journey Ends</div>
@@ -185,10 +384,11 @@
 
   <div class="mt-10">
     <div class="opacity-50">Analysis of mood (Monthly)</div>
-    <HeatMap />
+    <HeatMap mood={data.moodboarddata} />
   </div>
   <div class="mt-10">
     <div class="flex justify-between items-center">
+      <!-- svelte-ignore a11y-click-events-have-key-events -->
       <div class="cursor-pointer" on:click={likeJourney}>
         {#if data.isLiked}
           <div>
@@ -228,6 +428,7 @@
     <div class="opacity-50">Public Comments</div>
     <form class="mt-4">
       <textarea
+        bind:value={comment}
         type="text"
         placeholder="Your ten cents here..."
         class="textarea w-full textarea-bordered bg-transparent"
@@ -236,13 +437,21 @@
         id=""
       />
       <button
-        on:click={() => {}}
+        on:click={() => {
+          // TODO : integration insert
+          // TODO: call update
+        }}
         class="btn w-full bg-indigo-500 text-white"
         type="submit">Submit</button
       >
     </form>
-    <CommentCard />
-    <CommentCard />
-    <CommentCard />
+
+    {#each data.comments as comment}
+      <CommentCard
+        comment={comment.commentcontent}
+        username={comment.commentor.username}
+        dp={comment.commentor.dp}
+      />
+    {/each}
   </div>
 </section>

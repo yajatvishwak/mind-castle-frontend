@@ -5,16 +5,20 @@ import Home from "./lib/Home.svelte";
 import Journey from "./lib/Journey.svelte";
 import Add from "./lib/Add.svelte";
 import Edit from "./lib/Edit.svelte";
-import TherapistVerification from "./lib/TherapistVerification.svelte";
 import Profile from "./lib/Profile.svelte";
 import MyPersonality from "./lib/MyPersonality.svelte";
 import Troops from "./lib/Troops.svelte";
+import Chat from "./lib/Chat.svelte";
+import ReadJourney from "./lib/ReadJourney.svelte";
+import MonthlyMoodBoard from "./lib/MonthlyMoodBoard.svelte";
 const routes = {
   "/signin": Signin,
   "/signup": Signup,
-  "/therapist-verification": TherapistVerification,
   "/personality": Personality,
   "/home": Home,
+  "/monthly-mood": MonthlyMoodBoard,
+  "/read-journey": ReadJourney,
+  "/troop/chat/:id": Chat,
   "/journey/:journeyid": Journey,
   "/add": Add,
   "/edit/:journeyid": Edit,

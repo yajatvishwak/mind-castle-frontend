@@ -2,6 +2,7 @@
   import axios from "axios";
   import toast from "svelte-french-toast";
   import { push } from "svelte-spa-router";
+  import Footer from "./components/Footer.svelte";
   import Navbar from "./Navbar.svelte";
   import baseurl from "./url.store";
   let title = "";
@@ -26,7 +27,7 @@
 >
   <Navbar />
   <div class="text-xl mt-10 font-bold">
-    Journeys are periodic blogs you can maintain on Aurora
+    Journeys are periodic blogs you can maintain on Mind Castle
   </div>
   <div class="text-xl mt-10">Add your Journey</div>
   <div class="flex flex-col gap-2">
@@ -49,3 +50,4 @@
     </div>
   </div>
 </section>
+<Footer />
