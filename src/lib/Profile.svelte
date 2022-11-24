@@ -1,5 +1,6 @@
 <script>
   import Navbar from "./Navbar.svelte";
+  import {push} from "svelte-spa-router";
   let data = {
     name: "Danny Ultra Boy",
     personality: "INTP",
@@ -31,7 +32,7 @@
         <img src="https://placeimg.com/192/192/people" alt="" />
       </div>
     </div>
-    <h3 class="text-4xl font-semibold leading-normal mb-2 text-blueGray-700">
+    <h3 class="text-2xl font-semibold leading-normal mb-2 text-blueGray-700">
       {data.name}
     </h3>
     <div
@@ -44,9 +45,9 @@
 
   <div class="mb-5 flex items-center justify-between mt-8">
     <h4 class="font-medium text-slate-500">Your Journeys</h4>
-    <div class="rounded-md bg-gray-400/70 px-2 font-semibold text-gray-900">
+    <button on:click={()=>{push("/add")}} class="rounded-md btn btn-xs btn-outline px-2 font-semibold text-gray-900">
       +
-    </div>
+    </button>
   </div>
 
   {#each data.journeys as journey}
@@ -73,32 +74,30 @@
       </div>
     </div>
   {/each}
+  <div class="divider"></div> 
 
-  <div class="mb-5 flex items-center justify-between mt-6">
-    <h4 class="font-medium text-slate-500">Personality</h4>
-  </div>
-  <div class="flex items-center justify-center bg-gradient-to-br">
-    <div
-      class="bg-white font-semibold text-center rounded-3xl border shadow-lg p-10 max-w-xs"
-    >
-      <img
-        class="mb-3 w-32 h-32 rounded-full mx-auto"
-        src="https://static.neris-assets.com/images/personality-types/avatars/intp-logician.png"
-        alt="product designer"
-      />
-      <h1 class="text-lg text-gray-700">{data.personality}</h1>
-      <h3 class="text-sm text-gray-400 mt-2 ">
-        Introversion (I) , Intuition (N), Thinking (T), Perceiving (P)
-      </h3>
-      <p class="mt-4">Personality Characteristics</p>
-      <p class="mt-4">
-        INTPs are quiet, reserved, and thoughtful. As introverts, they prefer to
-        socialize with a small group of close friends.
-      </p>
-      <button
-        class="bg-indigo-600 px-8 py-2 mt-8 rounded-3xl text-gray-100 font-semibold uppercase tracking-wide"
-        >Retake Test</button
-      >
+  <button on:click={()=>{push("/mypersonality")}} class="flex rounded-xl justify-between bg-white p-5 shadow-sm my-2 border-2 border-indigo-500 mt-4">
+    <div>
+      <h4 class="font-semibold text-gray-600 text-lg">Personality Details</h4>
+      
     </div>
-  </div>
+    <div class="justify-center items-center flex">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke-width="1.5"
+        stroke="currentColor"
+        class="w-6 h-6"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3"
+        />
+      </svg>
+    </div>
+  </button>
+
+  
 </section>

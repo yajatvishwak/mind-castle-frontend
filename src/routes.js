@@ -8,6 +8,7 @@ import Edit from "./lib/Edit.svelte";
 import TherapistVerification from "./lib/TherapistVerification.svelte";
 import Profile from "./lib/Profile.svelte";
 import MyPersonality from "./lib/MyPersonality.svelte";
+import Troops from "./lib/Troops.svelte";
 const routes = {
   "/signin": Signin,
   "/signup": Signup,
@@ -19,5 +20,6 @@ const routes = {
   "/edit/:journeyid": Edit,
   "/profile": Profile,
   "/mypersonality": MyPersonality,
+  "/troops" : Troops,
 };
 export default routes;

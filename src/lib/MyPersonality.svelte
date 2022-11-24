@@ -7,14 +7,14 @@
 >
   <Navbar />
   <div class="text-center mt-8">
-    <h3 class="text-4xl font-semibold leading-normal mb-2 text-blueGray-700">
-      My Personality
+    <h3 class="text-2xl font-semibold leading-normal mb-2 text-blueGray-700">
+      Your Personality
     </h3>
   </div>
 
-  <div class="flex items-center justify-center bg-gradient-to-br mt-8">
+  <div class="flex items-center justify-center bg-gradient-to-br">
     <div
-      class="bg-white font-semibold text-center rounded-3xl border shadow-lg p-10 max-w-xs"
+      class="font-semibold text-center rounded-3xl p-10 max-w-xs"
     >
       <img
         class="mb-3 w-32 h-32 rounded-full mx-auto"
@@ -22,10 +22,25 @@
         alt=""
       />
       <h1 class="text-lg text-gray-700">INTP</h1>
+      <div class="flex items-center gap-4">
+      <p>I</p>
+      <progress class="progress progress-success w-36" value="25" max="100" />
+      <p>E</p>
+      </div>
+
+      <div class="flex items-center gap-4">
+      <p>F</p>
+      <progress class="progress progress-success w-36" value="78" max="100" />
+      <p>P</p>
+      </div>
+
+      <div class="flex items-center gap-4">
+      <p>E</p>
+      <progress class="progress progress-success w-36" value="32" max="100" />
+      <p>J</p>
+      </div>
       
-      <p class="text-sm">E</p><progress class="progress progress-success w-36" value="10" max="100" />
-      <progress class="progress progress-success w-36" value="40" max="100" />
-      <progress class="progress progress-success w-36" value="70" max="100" />
+      
      
       <h3 class="text-sm text-gray-400 mt-2 ">
         Introversion (I) , Intuition (N), Thinking (T), Perceiving (P)
