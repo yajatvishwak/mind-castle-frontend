@@ -5,6 +5,9 @@ import Home from "./lib/Home.svelte";
 import Journey from "./lib/Journey.svelte";
 import Add from "./lib/Add.svelte";
 import Edit from "./lib/Edit.svelte";
+import Profile from "./lib/Profile.svelte";
+import MyPersonality from "./lib/MyPersonality.svelte";
+import Troops from "./lib/Troops.svelte";
 import Chat from "./lib/Chat.svelte";
 import ReadJourney from "./lib/ReadJourney.svelte";
 import MonthlyMoodBoard from "./lib/MonthlyMoodBoard.svelte";
@@ -19,5 +22,8 @@ const routes = {
   "/journey/:journeyid": Journey,
   "/add": Add,
   "/edit/:journeyid": Edit,
+  "/profile": Profile,
+  "/mypersonality": MyPersonality,
+  "/troops" : Troops,
 };
 export default routes;
