@@ -8,14 +8,16 @@
   export let jid = "";
 </script>
 
-<div class="flex rounded-lg flex-col   bg-white p-5 shadow-sm my-2">
-  <h4 class="font-semibold text-gray-600  line-clamp-2">
+<div
+  class="flex rounded-lg flex-col  dark:bg-slate-800  bg-white p-5 shadow-sm my-2"
+>
+  <h4 class="font-semibold   line-clamp-2">
     How to become strong in life ? Lorem, ipsum dolor sit amet consectetur
     adipisicing elit. Expedita, impedit possimus consectetur voluptatibus
     blanditiis cum officiis, eius, culpa voluptatum tempore aperiam laborum sit
     laboriosam hic nostrum similique repellendus explicabo. Iure!
   </h4>
-  <p class="text-sm text-slate-400 mt-1">Updated 2 days ago</p>
+  <p class="text-sm opacity-50 mt-1">Updated 2 days ago</p>
   <div class="flex text-sm gap-2 mt-2 items-center">
     <div class="w-7 rounded-full bg-indigo-400">
       <img

@@ -25,14 +25,15 @@
           /></svg
         >
       </button>
+      <!-- svelte-ignore a11y-no-noninteractive-tabindex -->
       <ul
         tabindex="0"
-        class="menu dropdown-content p-2 shadow bg-base-100 rounded-box w-52 mt-4"
+        class="menu dropdown-content p-2 bg-slate-800 shadow  flex flex-col gap-2 rounded-box w-52 mt-4"
       >
         <li><a>Profile</a></li>
         <li><a>Event</a></li>
         <li><a>Troops</a></li>
-        <li class="bg-red-200 rounded-box">
+        <li class="bg-red-600 text-white rounded-box flex">
           <div
             on:click={() => {
               localStorage.clear();

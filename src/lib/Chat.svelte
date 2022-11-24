@@ -39,11 +39,11 @@
   <Navbar />
   <div class="flex flex-col  h-full">
     <div class="text-xl mt-8">Moving to a new city</div>
-    <div class="flex flex-col gap-2 w-full my-5 overflow-auto flex-1   ">
+    <div class="flex flex-col gap-2 w-full my-5 overflow-auto flex-1 pr-4  ">
       {#each messages as message}
         {#if message.user.username === localStorage.getItem("username")}
           <div
-            class="p-3  border-2 text-black self-end max-w-[250px]   rounded-xl"
+            class="p-3 bg-indigo-300 dark:bg-indigo-900 border-0 dark:text-gray-400  text-indigo-800 self-end max-w-[250px]   rounded-xl"
           >
             {message.message}
           </div>
@@ -51,7 +51,7 @@
           <div class="flex gap-3 items-end ">
             <img src={message.user.dp} class="w-10 h-10 rounded-full" alt="" />
             <div
-              class="p-3 scroll-m-3  bg-indigo-300 text-indigo-800 max-w-[250px] rounded-xl"
+              class="p-3 scroll-m-3  bg-indigo-300 dark:bg-indigo-700 dark:text-gray-400 text-indigo-800 max-w-[250px] rounded-xl"
             >
               {message.message}
             </div>
@@ -70,14 +70,14 @@
             name=""
             id=""
           />
-          <button class="btn btn-square">
+          <button class="btn btn-square bg-indigo-500 text-white">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
               viewBox="0 0 24 24"
               stroke-width="1.5"
               stroke="currentColor"
-              class="w-6 h-6"
+              class="w-4 h-4"
             >
               <path
                 stroke-linecap="round"

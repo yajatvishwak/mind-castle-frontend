@@ -35,6 +35,11 @@
         mood: "sad",
         sentimentScore: 0.2,
       },
+      {
+        date: moment("04/05/2000", "DD/MM/YYYY"),
+        mood: "sad",
+        sentimentScore: 0.2,
+      },
     ],
     moodboarddata: {},
   };
