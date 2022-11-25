@@ -384,7 +384,7 @@
 
   <div class="mt-10">
     <div class="opacity-50">Analysis of mood (Monthly)</div>
-    <HeatMap mood={data.moodboarddata} />
+    <HeatMap mood={data.moodboarddata} month={moment().format("MMMM")} />
   </div>
   <div class="mt-10">
     <div class="flex justify-between items-center">
