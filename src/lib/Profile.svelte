@@ -1,6 +1,8 @@
 <script>
   import Navbar from "./Navbar.svelte";
   import { push } from "svelte-spa-router";
+  import axios from "axios";
+  import { onMount } from "svelte";
   let data = {
     name: "Danny Ultra Boy",
     personality: "INTP",
@@ -29,6 +31,19 @@
       },
     ],
   };
+
+  onMount(async () => {
+    fetchData();
+  });
+
+  async function fetchData() {
+    const response = await axios.get("/api/profile", {
+      headers: {
+        authorization: localStorage.getItem("token"),
+      },
+    });
+    data = response.data.user;
+  }
 </script>
 
 <section
@@ -99,33 +114,31 @@
   <h4 class="font-medium text-slate-500 mb-4">Liked Journeys</h4>
 
   {#each data.liked as like}
-  <div
-    class="flex rounded-xl justify-between dark:bg-slate-800  bg-white p-5 shadow-sm my-2"
-  >
-    <div>
-      <h4 class="font-semibold  text-lg">{like.title}</h4>
-      <p class="text-sm opacity-50 mt-1">Updated 2 days ago</p>
+    <div
+      class="flex rounded-xl justify-between dark:bg-slate-800  bg-white p-5 shadow-sm my-2"
+    >
+      <div>
+        <h4 class="font-semibold  text-lg">{like.title}</h4>
+        <p class="text-sm opacity-50 mt-1">Updated 2 days ago</p>
+      </div>
+      <div class="justify-center items-center flex">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke-width="1.5"
+          stroke="currentColor"
+          class="w-6 h-6"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3"
+          />
+        </svg>
+      </div>
     </div>
-    <div class="justify-center items-center flex">
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        fill="none"
-        viewBox="0 0 24 24"
-        stroke-width="1.5"
-        stroke="currentColor"
-        class="w-6 h-6"
-      >
-        <path
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3"
-        />
-      </svg>
-    </div>
-  </div>
-{/each}
-  
-  
+  {/each}
 
   <div class="divider" />
 
