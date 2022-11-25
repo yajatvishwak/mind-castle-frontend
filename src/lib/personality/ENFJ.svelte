@@ -132,7 +132,7 @@
             Ralph Nader, Abraham Maslow, and Dr. Phil McGraw are notable ENFJs.
         </div>
 
-        <h1 class="mt-4 text-lg opacity-50">Facts about INTPs</h1>
+        <h1 class="mt-4 text-lg opacity-50">Facts about ENFJs</h1>
         <div class="mt-4">
             Interesting facts about the ENFJ:
             <uL>
@@ -167,7 +167,7 @@
             </uL>
         </div>
 
-        <h1 class="mt-4 text-lg opacity-50">INTP Hobbies and Interests</h1>
+        <h1 class="mt-4 text-lg opacity-50">ENFJ Hobbies and Interests</h1>
         <div class="mt-4">
             The ENFJ enjoys planning social gatherings, reading, the arts,
             visiting museums, listening to music, writing, storytelling, and

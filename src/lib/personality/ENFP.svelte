@@ -137,7 +137,7 @@
             Baez, Regis Philbin, and Drew Barrymore.
         </div>
 
-        <h1 class="mt-4 text-lg opacity-50">Facts about INTPs</h1>
+        <h1 class="mt-4 text-lg opacity-50">Facts about ENFPs</h1>
         <div class="mt-4">
             Interesting facts about the ENFP:
             <uL>
@@ -171,7 +171,7 @@
             </uL>
         </div>
 
-        <h1 class="mt-4 text-lg opacity-50">INTP Hobbies and Interests</h1>
+        <h1 class="mt-4 text-lg opacity-50">ENFP Hobbies and Interests</h1>
         <div class="mt-4">
             Writing, making and appreciating art, playing musical instruments,
             listening to music, taking part in community theater, and reading
