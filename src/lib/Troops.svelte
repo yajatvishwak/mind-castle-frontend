@@ -48,7 +48,7 @@
     <div
       class=""
       on:click={() => {
-        push(`/troop/${troop.id}`);
+        push(`/troop/chat/${troop.id}`);
       }}
     >
       <div

@@ -10,7 +10,9 @@
   >
     <button
       on:click={() => push("/home")}
-      class="flex flex-col items-center hover:scale-95 cursor-pointer transition-all justify-center"
+      class={`flex flex-col items-center hover:scale-95 cursor-pointer transition-all justify-center px-4 py-1 ${
+        $location.includes("home") ? "bg-indigo-700  rounded-xl" : ""
+      }`}
     >
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -31,7 +33,9 @@
 
     <button
       on:click={() => push("/add")}
-      class="flex flex-col items-center hover:scale-95 cursor-pointer transition-all justify-center"
+      class={`flex flex-col items-center hover:scale-95 cursor-pointer transition-all justify-center px-4 py-1 ${
+        $location.includes("add") ? "bg-indigo-700 rounded-xl" : ""
+      }`}
     >
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -51,7 +55,9 @@
     </button>
     <button
       on:click={() => push("/read-journey")}
-      class="flex flex-col items-center  hover:scale-95 cursor-pointer transition-all justify-center"
+      class={`flex flex-col items-center hover:scale-95 cursor-pointer transition-all justify-center px-4 py-1 ${
+        $location.includes("read-journey") ? "bg-indigo-700  rounded-xl" : ""
+      }`}
     >
       <svg
         xmlns="http://www.w3.org/2000/svg"

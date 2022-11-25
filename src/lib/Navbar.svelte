@@ -1,5 +1,5 @@
 <script>
-  import { push } from "svelte-spa-router";
+  import { push, location } from "svelte-spa-router";
 </script>
 
 <div class="flex justify-between items-center">
@@ -30,10 +30,27 @@
         tabindex="0"
         class="menu dropdown-content p-2 dark:bg-slate-800 bg-white shadow  flex flex-col gap-2 rounded-box w-52 mt-4"
       >
-        <li><a href="/#/home">Home</a></li>
-        <li><a href="/#/profile">Profile</a></li>
-        <li><a href="/#/event-logs">Event</a></li>
-        <li><a href="/#/troops">Troops</a></li>
+        {#if $location.includes("home")}
+          <li><a class="bg-indigo-100" href="/#/home">Home</a></li>
+        {:else}
+          <li><a href="/#/home">Home</a></li>
+        {/if}
+        {#if $location.includes("profile")}
+          <li><a class="bg-indigo-100" href="/#/profile">Profile</a></li>
+        {:else}
+          <li><a href="/#/profile">Profile</a></li>
+        {/if}
+        {#if $location.includes("event")}
+          <li><a href="/#/event-logs" class="bg-indigo-100">Event</a></li>
+        {:else}
+          <li><a href="/#/event-logs">Event</a></li>
+        {/if}
+        {#if $location.includes("troops")}
+          <li><a href="/#/troops" class="bg-indigo-100">Troops</a></li>
+        {:else}
+          <li><a href="/#/troops">Troops</a></li>
+        {/if}
+
         <li class="bg-red-600 text-white rounded-box flex">
           <div
             on:click={() => {
