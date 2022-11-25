@@ -2,7 +2,7 @@
     <div class="font-semibold text-center rounded-3xl p-10 max-w-xs">
         <img
             class="mb-3 w-32 h-32 rounded-full mx-auto"
-            src="https://static.neris-assets.com/images/personality-types/avatars/intp-logician.png"
+            src="https://static.neris-assets.com/images/personality-types/avatars/enfj-protagonist.png"
             alt=""
         />
         <h1 class="text-lg opacity-50">ENFJ</h1>
@@ -134,7 +134,7 @@
 
         <h1 class="mt-4 text-lg opacity-50">Facts about INTPs</h1>
         <div class="mt-4">
-            Interesting facts about the INTP:
+            Interesting facts about the ENFJ:
             <uL>
                 <li>
                     On personality trait scales, scored as Active, Pleasant,
