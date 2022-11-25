@@ -1,6 +1,5 @@
 <script>
   import Navbar from "./Navbar.svelte";
-  import Intp from "./personality/INTP.svelte";
 </script>
 
 <section

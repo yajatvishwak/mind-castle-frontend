@@ -1,4 +1,6 @@
 <script>
+  import { push } from "svelte-spa-router";
+
   export let title = "";
   export let timeago = "";
   export let dp = "";
@@ -8,7 +10,8 @@
   export let jid = "";
 </script>
 
-<div
+<button
+  on:click={() => push("/journey/" + "123")}
   class="flex rounded-lg flex-col  dark:bg-slate-800  bg-white p-5 shadow-sm my-2"
 >
   <h4 class="font-semibold   line-clamp-2">
@@ -31,4 +34,4 @@
       <div class="text-xs">4k likes, 20 comments</div>
     </div>
   </div>
-</div>
+</button>

@@ -31,7 +31,7 @@
         analytics: {
           overallmood: "happy",
           overallsentimentscore: 23,
-          mostusedwords: [],
+          mostusedwords: ["Car", "sad"],
         },
       },
     },
