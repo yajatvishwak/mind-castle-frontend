@@ -1,5 +1,5 @@
 <script>
-  import { push } from "svelte-spa-router";
+  import { push, location } from "svelte-spa-router";
 </script>
 
 <div
