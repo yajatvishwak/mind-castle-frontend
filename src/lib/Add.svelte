@@ -8,16 +8,18 @@
   let title = "";
   async function create() {
     if (title) {
-      const { data } = await axios.post($baseurl + "create-journey", {
-        title,
-        username: localStorage.getItem("username"),
+      const { data } = await axios.post($baseurl + "journey/create-journey", {
+        journeyTitle: title,
+        token: localStorage.getItem("token"),
       });
       if (data.code === "success") {
         toast.success("Journey creation successful");
-        push("/home");
+        push("/journey/" + data.id);
       } else {
-        toast.error("Sign in failed : " + data.message);
+        toast.error(data.message);
       }
+    } else {
+      toast.error("We need a journey title");
     }
   }
 </script>
