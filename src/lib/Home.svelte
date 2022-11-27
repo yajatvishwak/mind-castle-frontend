@@ -60,7 +60,7 @@
     {#each data.journey as journey}
       <JourneyCard
         comments={journey.comments}
-        dp={journey.dp}
+        dp={journey.author}
         jid={journey._id}
         likes={journey.likes}
         timeago={journey.timeago}

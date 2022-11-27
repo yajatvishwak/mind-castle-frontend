@@ -31,7 +31,7 @@
       >
         <img
           src={"https://avatars.dicebear.com/api/miniavs/" +
-            localStorage.getItem("username") +
+            localStorage.getItem("name") +
             ".svg"}
           alt=""
         />

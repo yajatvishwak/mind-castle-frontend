@@ -29,8 +29,7 @@
     <div class="w-7 rounded-full bg-indigo-400">
       <img
         class="w-full h-full rounded-full"
-        src={dp ||
-          "https://avatars.dicebear.com/api/miniavs/" + username + ".svg"}
+        src={"https://avatars.dicebear.com/api/miniavs/" + username + ".svg"}
         alt=""
       />
     </div>
