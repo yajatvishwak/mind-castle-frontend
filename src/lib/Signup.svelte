@@ -7,15 +7,16 @@
   let username, name, password;
   async function signup() {
     if (name && username && password) {
-      const { data } = await axios.post($baseurl + "signup", {
+      const { data } = await axios.post($baseurl + "user/signup", {
         username,
         password,
         name,
       });
       if (data.code === "success") {
-        localStorage.setItem("userid", data.userid);
         localStorage.setItem("username", username);
-        toast.success("Sign up successful");
+        localStorage.setItem("token", data.token);
+        localStorage.setItem("name", name);
+        toast.success("Sign up initiated");
         push("/personality");
       } else {
         toast.error("Sign up failed : " + data.message);

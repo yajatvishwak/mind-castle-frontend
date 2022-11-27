@@ -6,15 +6,16 @@
   let username, password;
   async function signin() {
     if (username && password) {
-      const { data } = await axios.post($baseurl + "login", {
+      const { data } = await axios.post($baseurl + "user/signin", {
         username,
         password,
       });
       console.log(data);
       if (data.code === "success") {
-        localStorage.setItem("userid", data.data.userid);
+        localStorage.setItem("token", data.token);
         localStorage.setItem("username", username);
-        localStorage.setItem("personality", data.data.personality);
+        localStorage.setItem("name", data.name);
+        localStorage.setItem("personality", data.finalpersonality);
         toast.success("Sign in successful");
         push("/home");
       } else {

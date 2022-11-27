@@ -7,14 +7,10 @@
   import { push } from "svelte-spa-router";
   import Footer from "./components/Footer.svelte";
   import JourneyCard from "./components/JourneyCard.svelte";
+  import Loading from "./components/Loading.svelte";
   import Navbar from "./Navbar.svelte";
   import baseurl from "./url.store";
 
-  let isSearchModalOpen = false;
-  let userpersonality = "";
-  let isReadJourney = true;
-  let searchdata = [];
-  let feeling = "";
   let loading = false;
   onMount(async () => {
     await fetchData();
@@ -54,20 +50,26 @@
   class="bg-slate-100 w-screen h-full flex flex-col dark:bg-slate-900 p-8 min-h-screen mx-auto max-w-lg"
 >
   <Navbar />
-  <div class="text-2xl mt-8">Welcome, {data.name}</div>
-  <div class="opacity-70">Check out curated journey for you</div>
-  <div class="mt-5 flex flex-col gap-3 last:mb-20">
-    {#each data.journey as journey}
-      <JourneyCard
-        comments={journey.comments}
-        dp={journey.author}
-        jid={journey._id}
-        likes={journey.likes}
-        timeago={journey.timeago}
-        title={journey.title}
-        username={journey.author}
-      />
-    {/each}
-  </div>
+  {#if loading}
+    <div class="flex-1 flex items-center justify-center">
+      <Loading />
+    </div>
+  {:else}
+    <div class="text-2xl mt-8">Welcome, {data.name}</div>
+    <div class="opacity-70">Check out curated journey for you</div>
+    <div class="mt-5 flex flex-col gap-3 last:mb-20">
+      {#each data.journey as journey}
+        <JourneyCard
+          comments={journey.comments}
+          dp={journey.author}
+          jid={journey._id}
+          likes={journey.likes}
+          timeago={journey.timeago}
+          title={journey.title}
+          username={journey.author}
+        />
+      {/each}
+    </div>
+  {/if}
 </section>
 <Footer />
