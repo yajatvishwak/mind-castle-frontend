@@ -25,7 +25,9 @@
   }
 </script>
 
-<section class="bg-slate-100 w-screen h-screen dark:bg-slate-900 p-10">
+<section
+  class="bg-slate-100 w-screen h-screen flex flex-col dark:bg-slate-900 p-8 min-h-screen mx-auto max-w-lg"
+>
   <form
     on:submit|preventDefault={signup}
     class="flex flex-col items-center justify-center h-full gap-3"
@@ -33,9 +35,7 @@
     <div class="flex flex-col">
       <img src="logo.png" alt="" />
     </div>
-    <div class="text-xl font-bold self-start opacity-50">
-      Aurora Mental Health
-    </div>
+    <div class="text-xl font-bold self-start opacity-50">Mind Castle</div>
     <label for="username" class="label-text opacity-50 self-start"
       >Username</label
     >
