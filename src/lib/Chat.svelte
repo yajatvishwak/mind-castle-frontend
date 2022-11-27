@@ -36,12 +36,14 @@
       token: localStorage.getItem("token"),
     });
     loading = false;
-    console.log(data);
+    // console.log(data);
     messages = data.troop.messages;
     title = data.troop.troopTitle;
     owner = data.troop.troopOwner.name;
-
-    socket = io(import.meta.env.VITE_BASEURL_SOCKET);
+    // console.log(import.meta.env.VITE_BASEURL_SOCKET);
+    socket = io(import.meta.env.VITE_BASEURL_SOCKET, {
+      path: "/chat/",
+    });
     socket.on("connect", () => {
       console.log("Connected to chat server");
       socket.emit("join-chatroom", params.id);
