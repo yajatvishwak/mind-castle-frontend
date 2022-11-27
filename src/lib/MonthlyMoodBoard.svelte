@@ -43,7 +43,19 @@
     ],
     moodboarddata: {},
   };
-  onMount(() => {
+  let loading = false;
+  async function fetchData() {
+    loading = true;
+    const res = await axios.post($baseurl + "user/get-moods", {
+      token: localStorage.getItem("token"),
+    });
+    if (res.data) {
+      data.mood = res.data;
+    }
+    loading = false;
+  }
+  onMount(async () => {
+    await fetchData();
     for (const mood of data.mood) {
       data["moodboarddata"][moment(mood.date).format("MMMM")] =
         data["moodboarddata"][moment(mood.date).format("MMMM")] || {};

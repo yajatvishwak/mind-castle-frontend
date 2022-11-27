@@ -29,7 +29,12 @@
       <div
         class="w-32 rounded-full ring ring-offset-base-100 ring-offset-2 mb-4 ring-indigo-500"
       >
-        <img src="https://placeimg.com/192/192/people" alt="" />
+        <img
+          src={"https://avatars.dicebear.com/api/miniavs/" +
+            localStorage.getItem("username") +
+            ".svg"}
+          alt=""
+        />
       </div>
     </div>
     <h3 class="text-2xl font-semibold leading-normal mb-2 text-blueGray-700">

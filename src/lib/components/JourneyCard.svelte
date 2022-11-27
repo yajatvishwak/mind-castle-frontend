@@ -8,7 +8,7 @@
   export let likes = "";
   export let comments = "";
   export let jid = "";
-  export let match = 0.3;
+  export let match;
 </script>
 
 <!-- svelte-ignore a11y-click-events-have-key-events -->

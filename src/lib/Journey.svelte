@@ -168,6 +168,7 @@
     const res = await axios.post($baseurl + "journey/add-story", formData);
     if (res.data.code === "success") toast.success("Saved successfully!");
     await fetchData();
+    isAddModalOpen = false;
   }
 
   async function editJourney() {

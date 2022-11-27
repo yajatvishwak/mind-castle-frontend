@@ -1,4 +1,6 @@
 <script>
+  // @ts-nocheck
+
   import axios from "axios";
   import { onMount } from "svelte";
   import toast from "svelte-french-toast";

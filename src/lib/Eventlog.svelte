@@ -1,7 +1,9 @@
 <script>
+  import axios from "axios";
   import moment from "moment";
   import { onMount } from "svelte";
   import Navbar from "./Navbar.svelte";
+  import baseurl from "./url.store";
   let data = {
     logs: {
       "03/12/2022": {
@@ -36,8 +38,18 @@
       },
     },
   };
-  let newLogs = {};
-  onMount(() => {});
+  onMount(async () => {
+    await fetchData();
+  });
+  async function fetchData() {
+    const res = await axios.post($baseurl + "event/get-event", {
+      token: localStorage.getItem("token"),
+    });
+    if (res.data) {
+      data.logs = res.data.payload;
+      // console.log(res.data);
+    }
+  }
 </script>
 
 <section
@@ -73,9 +85,9 @@
         {/each}
       </div>
       {#each data["logs"][date]["logdetails"] as log}
-        <div class="p-3 border rounded-lg">
-          <div>{log.text}</div>
-          <div class="divider">Analysis</div>
+        <div class="p-3 border rounded-lg ">
+          <div class="font-bold mt-3">{log.text}</div>
+          <div class="divider text-xs">Analysis</div>
           <div class="mt-3 text-sm">Sentiment Score: {log.sentimentScore}</div>
           <div class="flex justify-between">
             <div class="text-sm">Mood: {log["mood"]}</div>
