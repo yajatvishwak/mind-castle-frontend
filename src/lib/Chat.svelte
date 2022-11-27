@@ -41,7 +41,7 @@
     title = data.troop.troopTitle;
     owner = data.troop.troopOwner.name;
 
-    socket = io("http://localhost:5000");
+    socket = io(import.meta.env.VITE_BASEURL_SOCKET);
     socket.on("connect", () => {
       console.log("Connected to chat server");
       socket.emit("join-chatroom", params.id);
