@@ -41,9 +41,7 @@
     title = data.troop.troopTitle;
     owner = data.troop.troopOwner.name;
     // console.log(import.meta.env.VITE_BASEURL_SOCKET);
-    socket = io(import.meta.env.VITE_BASEURL_SOCKET, {
-      path: "/chat/",
-    });
+    socket = io(import.meta.env.VITE_BASEURL_SOCKET);
     socket.on("connect", () => {
       console.log("Connected to chat server");
       socket.emit("join-chatroom", params.id);
