@@ -361,3 +361,176 @@ let ESFJ = {
     celebrations and family traditions, cooking, entertaining, and
     social sports are among the ESFJs' favourite pastimes.`,
 };
+
+let ESFP = {
+  img: "esfp.png",
+  tagline: "THE PERFORMER",
+  desc1: ` ESFPs are outgoing performers who captivate and enthral others
+    around them. They enjoy the people, food, clothing, environment,
+    animals, and especially people around them. They are impulsive,
+    vivacious, and fun-loving.`,
+  desc2: ` ESFPs often have a contagious zest for life and are friendly and outgoing.
+    They prefer to be at the centre of things and the focus of attention.
+    They enjoy bringing other people out and making them laugh. They have
+    a fun, open sense of humour.`,
+  standsfor1: ` One of the sixteen personality types identified by Isabel Myers and
+    Katharine Briggs is referred to by the acronym ESFP. Extraverted,
+    Sensing, Feeling, and Perceiving are its initials. The personality
+    type ESFP describes someone who gets their energy from being around
+    other people, who prioritises facts and details above ideas and
+    concepts, who bases decisions on feelings and principles, and who
+    prefers to be flexible and impromptu rather than planned and
+    organised (Perceiving). Because of their fun, vivacious
+    dispositions, ESFPs are also referred to as Performer personalities.`,
+  values1: `ESFPs enjoy the present moment and all that life has to offer. They
+    have great sensory awareness and enjoy the sights, sounds, smells,
+    and sensations around them. ESFPs enjoy being active, so they cram
+    their schedules with interests, sports, social engagements, and
+    friends. When there are too many fascinating things to do, they may
+    get overwhelmed since they prefer to live impulsively rather than
+    plan ahead. Nothing is worse to an ESFP than being left out of the
+    fun.`,
+  values2: ` ESFPs tend to be fun-loving, but they are also often realistic and down
+    to earth. They have a firm grasp on reality and are frequently acutely
+    aware of the specifics of their surroundings, particularly as they relate
+    to people. They are perceptive to other people's needs and are quick
+    to offer assistance. ESFPs like to lend a hand, especially in real, concrete
+    ways.`,
+
+  see1: `ESFPs are frequently the light of the party, joking around and
+    energising others. They pay attention to whether others are having
+    fun and try to make things enjoyable for everyone. ESFPs may take
+    the initiative to engage everyone in an active diversion because
+    they are most comfortable in their physical surroundings. Although
+    they tend to be very open and pleasant, ESFPs might be difficult to
+    become close to because they find it difficult to be serious or talk
+    about anything negative.`,
+  see2: `Due to their keen sense of smell and touch, ESFPs are drawn to situations
+    with attractive hues and textures. They frequently chose their surroundings'
+    materials and ornaments with great care. The attention they receive frequently
+    manifests in other ways as well; ESFPs frequently dress in sensual fabrics
+    or vibrant, eye-catching hues. They frequently follow the most recent
+    trends and enjoy introducing others to novel settings and experiences.`,
+  famous: ` Marilyn Monroe, Dolly Parton, Elizabeth Taylor, Judy Garland, Elvis
+    Presley, Magic Johnson, Ronald Reagan, Serena Williams, Paul
+    McCartney, Bob Hope, and Goldie Hawn are examples of famous ESFPs`,
+  hobbies: `Socializing, team sports, DIY projects, cooking, entertaining,
+    playing games, and dancing are common pastimes for ESFPs. Large
+    parties and gatherings are their favourite, and ESFPs are eager to
+    join any club or activity that sounds like fun.`,
+};
+let ESTJ = {
+  img: "estj.png",
+  tagline: "THE SUPERVISOR",
+  desc1: `Hardworking traditionalists, ESTJs are eager to take the reins when
+    it comes to managing tasks and people. Orderly, law-abiding, and
+    diligent, ESTJs like to get things done and frequently approach
+    tasks in a logical, systematic fashion.`,
+  desc2: `ESTJs are master planners who aspire to give their surroundings order.
+    They appreciate regularity and favour logical progression. The ESTJ frequently
+    takes the initiative to create procedures and rules when they notice
+    a lack of organisation so that everyone is aware of what is expected.`,
+  standsfor1: `One of the sixteen personality types identified by Isabel Myers and
+    Katharine Briggs is known by the initials ESTJ. Extraverted,
+    Sensing, Thinking, and Judging are its initials. The personality
+    type ESTJ describes someone who gets their energy from being around
+    other people (extroverted), who concentrates on facts and details
+    instead of ideas and concepts (sensing), who makes decisions using
+    logic and reason (thinking), and who prefers to be organised and
+    planned rather than spontaneous and flexible (Judging). Because of
+    their propensity to assume leadership roles and ensure that tasks
+    are completed precisely, ESTJs are occasionally referred to as
+    Supervisor personalities.`,
+  values1: `Conventional, factual, and rooted in reality are all traits of
+    ESTJs. The history provides the ESTJ with evidence of what has been
+    successful in the past. They trust their own expertise and prefer
+    facts to speculation. The ESTJ seeks out guidelines and norms to
+    uphold, and they frequently take the initiative to assist others in
+    doing the same. They are concerned with upholding social order and
+    controlling others.`,
+  values2: `At home and at work, ESTJs frequently take on the job of project manager
+    because they are excellent goal-setters, decision-makers, and resource
+    managers. The ESTJ wants to be productively efficient and typically thinks
+    that this can be done best when individuals and processes are well-organized.`,
+
+  see1: `When an ESTJ is in charge of a situation, it's because they have a
+    clear understanding of what should happen and are prepared to take
+    charge to make it happen. They prioritise their tasks and prioritise
+    work over play. The ESTJ looks to be in charge almost usually
+    because they are tough-minded and self-assured. ESTJs value order
+    and frequently start organising as soon as they walk into a place.
+    They want to lay out the ground rules and make sure that everyone
+    follows them.`,
+  see2: `In organisations like clubs, associations, societies, and churches, ESTJs
+    frequently participate and often assume leadership positions. Sharing
+    rituals and routines is how they usually establish connections with others.
+    For ESTJs, social engagement frequently entails adhering to established
+    customs in order to interact with people in a planned manner. ESTJs frequently
+    seek out and respect hierarchy. If there are no levels of responsibility,
+    they will assign them because they want to know who is in charge. Once
+    a system is established, ESTJs often respect and obey those in positions
+    of authority.`,
+  famous: ` Famous ESTJs include Colin Powell, Sandra Day O'Connor, Judge Judy
+    Sheindlin, Dr. Laura Schlessinger, Mike Wallace, and Vince Lombardi.`,
+  hobbies: `The ESTJ enjoys fixing and building things around the house,
+    gardening, volunteering, performing community duty, and
+    participating in and watching sports.`,
+};
+
+let ESTP = {
+  img: "estp.png",
+  tagline: "THE DYNAMO",
+  desc1: ` ESTPs are enthusiastic thrill-seekers who perform best when
+    extinguishing fires, whether they be real or imagined. They interact
+    with people and the world around them with a sense of dynamic
+    vitality. They make fast assessments of the environment and react
+    skillfully to respond to urgent issues with workable solutions.`,
+  desc2: `ESTPs are often the light of the party and have a strong sense of humour.
+    They are fun and active. They assess their audience using their acute
+    observational skills and change direction rapidly to keep encounters
+    engaging. The ESTP loves to keep things fast-paced and humorous rather
+    than emotional or serious, despite the fact that they frequently give
+    off the impression of being very social.`,
+  standsfor1: `One of the sixteen personality types identified by Isabel Myers and
+    Katharine Briggs is known by the initials ESTP. Extraverted,
+    Sensing, Thinking, and Perceiving are its initials. The personality
+    type ESTP is characterised by extraversion (being energised by other
+    people), sensing (focusing on facts and details rather than ideas
+    and concepts), thinking (making decisions based on logic and
+    reason), and preference for spontaneity and flexibility over planned
+    and organised behaviour (Perceiving). Because of their high-energy,
+    active way of life, ESTPs are also known as "dynamo personalities."`,
+  values1: ` Natural athletes, ESTPs can move around their physical environment
+    with ease and have a good sense of coordination. They frequently
+    love putting their skills to the test in risky or even dangerous
+    activities, and they enjoy using this physical aptitude in the
+    search of thrill and adventure.`,
+  values2: `The moment-to-moment focus of the ESTP is action. They interact with
+    their surroundings and find quick solutions to difficulties of a practical
+    nature. ESTPs succeed in urgent situations when they can use their logical
+    thinking to determine the best course of action. The ESTP loves to see
+    immediate, observable results, therefore long-term goals are less intriguing
+    to them.`,
+
+  see1: `The ESTP's energy is probably what you notice about them right away.
+    They frequently converse, joke around, and flirt with both friends
+    and total strangers. They enjoy having lively interactions with
+    others and making everyone around them laugh with their silly
+    humour. People are frequently kept on their toes since they never
+    know what the ESTP will make fun of next. ESTPs are openly sociable
+    with others, but their interest in people may wane over time. They
+    are more likely to work a room and have a good time with everyone
+    than they are to have a meaningful conversation with any one person.`,
+  see2: `ESTPs feel at ease in their surroundings and are constantly looking for
+    something to do. They are the most naturally coordinated of all the types
+    and are frequently seen participating in sports or other physical activities,
+    particularly ones that include some level of danger. They fit the stereotype
+    of "adrenaline junkies" and can be seen participating in extreme sports
+    like skydiving or racing motorcycles.`,
+  famous: `Famous ESTPs include Evel Knievel, Donald Trump, George W. Bush, Mae
+    West, Eddie Murphy, Miley Cyrus, Bruce Willis, and Winston
+    Churchill.`,
+  hobbies: `Sports and athletic activities of all kinds, especially team sports
+    and dangerous or daring endeavours like racing, boxing, or flying,
+    are popular pastimes for an ESTP.`,
+};
