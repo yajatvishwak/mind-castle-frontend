@@ -477,7 +477,6 @@ let INFJ = {
   music are among the INFJ's favourite pastimes.`,
 };
 
-
 let ENFJ = {
   img: "enfj.png",
   tagline: "THE TEACHER",
@@ -962,3 +961,24 @@ let ESTP = {
     and dangerous or daring endeavours like racing, boxing, or flying,
     are popular pastimes for an ESTP.`,
 };
+
+function getPersonalityData(personality) {
+  if (personality === "INTP") return INTP;
+  else if (personality === "ISTP") return ISTP;
+  else if (personality === "ISTJ") return ISTJ;
+  else if (personality === "ISFP") return ISFP;
+  else if (personality === "ISFJ") return ISFJ;
+  else if (personality === "INTJ") return INTJ;
+  else if (personality === "INFP") return INFP;
+  else if (personality === "ENFJ") return ENFJ;
+  else if (personality === "ENFP") return ENFP;
+  else if (personality === "ENTJ") return ENTJ;
+  else if (personality === "ENTP") return ENTP;
+  else if (personality === "ESFJ") return ESFJ;
+  else if (personality === "ESFP") return ESFP;
+  else if (personality === "ESTJ") return ESTJ;
+  else if (personality === "ESTP") return ESTP;
+  else return {};
+}
+
+export { getPersonalityData };

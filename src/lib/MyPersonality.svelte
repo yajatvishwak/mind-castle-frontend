@@ -1,6 +1,9 @@
 <script>
+  import { onMount } from "svelte";
+  import { getPersonalityData } from "../lib/personality/personality";
   import Navbar from "./Navbar.svelte";
-  let personality = "INTP";
+  export let params = {};
+  let personality = params.id;
   let data = {
     img: "intp.png",
     tagline: "THE ARCHITECT",
@@ -52,6 +55,10 @@
         strategy games, writing, taking classes, using computers, camping,
         trekking, and meditation are all common pastimes for INTPs.`,
   };
+  onMount(() => {
+    //@ts-ignore
+    data = getPersonalityData(personality);
+  });
 </script>
 
 <section

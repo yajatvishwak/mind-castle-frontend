@@ -25,7 +25,7 @@ const routes = {
   "/add": Add,
   "/edit/:journeyid": Edit,
   "/profile": Profile,
-  "/mypersonality": MyPersonality,
+  "/mypersonality/:id": MyPersonality,
   "/troops": Troops,
 };
 export default routes;
