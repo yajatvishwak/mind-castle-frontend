@@ -6,15 +6,16 @@
   let username, password;
   async function signin() {
     if (username && password) {
-      const { data } = await axios.post($baseurl + "login", {
+      const { data } = await axios.post($baseurl + "user/signin", {
         username,
         password,
       });
       console.log(data);
       if (data.code === "success") {
-        localStorage.setItem("userid", data.data.userid);
+        localStorage.setItem("token", data.token);
         localStorage.setItem("username", username);
-        localStorage.setItem("personality", data.data.personality);
+        localStorage.setItem("name", data.name);
+        localStorage.setItem("personality", data.finalpersonality);
         toast.success("Sign in successful");
         push("/home");
       } else {
@@ -24,7 +25,9 @@
   }
 </script>
 
-<section class="bg-slate-100 w-screen h-screen dark:bg-slate-900 p-10">
+<section
+  class="bg-slate-100 w-screen flex flex-col h-screen dark:bg-slate-900 p-8 min-h-screen mx-auto max-w-lg"
+>
   <form
     on:submit|preventDefault={signin}
     class="flex flex-col items-center justify-center h-full gap-3"
@@ -32,8 +35,9 @@
     <div class="flex flex-col">
       <img src="logo.png" alt="" />
     </div>
-    <div class="text-xl font-bold self-start opacity-50">
-      Aurora Mental Health
+    <div class="self-start">
+      <div class="text-xl font-bold self-start opacity-50">Mind Castle</div>
+      <div class="text-sm self-start">Welcome back! Login to continue</div>
     </div>
     <label for="username" class="label-text self-start">Username</label>
     <input

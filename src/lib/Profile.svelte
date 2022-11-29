@@ -1,6 +1,31 @@
 <script>
   import Navbar from "./Navbar.svelte";
   import { push } from "svelte-spa-router";
+  import axios from "axios";
+  import baseurl from "./url.store";
+  import toast from "svelte-french-toast";
+  import moment from "moment";
+  import { onMount } from "svelte";
+
+  let loading = false;
+
+  onMount(async () => {
+    await fetchData();
+  });
+
+  async function fetchData() {
+    loading = true;
+    const res = await axios.post($baseurl + "journey/get-journey/profile", {
+      token: localStorage.getItem("token"),
+    });
+    if (res && res.data.code === "success") {
+      data = res.data;
+    } else {
+      toast.error("Something went terribly wrong. Ahaaaaa!");
+    }
+    loading = false;
+  }
+
   let data = {
     name: "Danny Ultra Boy",
     personality: "INTP",
@@ -8,12 +33,12 @@
       {
         title: "Moving into a new city",
         id: "1",
-        updated: "2021-05-01",
+        updatedAt: "2021-05-01",
       },
       {
         title: "Handling mental health with physical",
         id: "2",
-        updated: "2021-05-01",
+        updatedAt: "2021-05-01",
       },
     ],
   };
@@ -29,7 +54,12 @@
       <div
         class="w-32 rounded-full ring ring-offset-base-100 ring-offset-2 mb-4 ring-indigo-500"
       >
-        <img src="https://placeimg.com/192/192/people" alt="" />
+        <img
+          src={"https://avatars.dicebear.com/api/miniavs/" +
+            localStorage.getItem("name") +
+            ".svg"}
+          alt=""
+        />
       </div>
     </div>
     <h3 class="text-2xl font-semibold leading-normal mb-2 text-blueGray-700">
@@ -61,7 +91,9 @@
     >
       <div>
         <h4 class="font-semibold  text-lg">{journey.title}</h4>
-        <p class="text-sm opacity-50 mt-1">Updated 2 days ago</p>
+        <p class="text-sm opacity-50 mt-1">
+          {moment(journey.updatedAt).fromNow()}
+        </p>
       </div>
       <div class="justify-center items-center flex">
         <svg

@@ -1,3 +1,4 @@
+
 <div class="flex items-center justify-center ">
   <div class="font-semibold text-center rounded-3xl p-10 max-w-xs">
     <img
@@ -146,3 +147,4 @@
     </div>
   </div>
 </div>
+

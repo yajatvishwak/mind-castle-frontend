@@ -21,7 +21,7 @@ const routes = {
   "/monthly-mood": MonthlyMoodBoard,
   "/read-journey": ReadJourney,
   "/troop/chat/:id": Chat,
-  "/journey/:journeyid": Journey,
+  "/journey/:id": Journey,
   "/add": Add,
   "/edit/:journeyid": Edit,
   "/profile": Profile,

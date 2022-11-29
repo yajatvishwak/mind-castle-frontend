@@ -21,6 +21,8 @@
   let isOwner = false;
   let storyContent = "";
   let comment = "";
+  let loading = false;
+  let storypic;
   let data = {
     title: "My Journey towards getting placed",
     author: "Andrew Tate",
@@ -53,10 +55,10 @@
       },
     ],
     likes: [
-      { imgurl: "https://avatars.dicebear.com/api/miniavs/1223.svg" },
-      { imgurl: "https://avatars.dicebear.com/api/miniavs/11f3.svg" },
-      { imgurl: "https://avatars.dicebear.com/api/miniavs/5hsr.svg" },
-      { imgurl: "https://avatars.dicebear.com/api/miniavs/5hsr.svg" },
+      { dp: "https://avatars.dicebear.com/api/miniavs/1223.svg" },
+      { dp: "https://avatars.dicebear.com/api/miniavs/11f3.svg" },
+      { dp: "https://avatars.dicebear.com/api/miniavs/5hsr.svg" },
+      { dp: "https://avatars.dicebear.com/api/miniavs/5hsr.svg" },
     ],
     isLiked: false, // check if user in likes array then set to tru else false on Mount
     owner: {
@@ -82,8 +84,50 @@
       },
     ],
   };
-  onMount(() => {
+
+  onMount(async () => {
     // TODO: Integration
+    await fetchData();
+  });
+
+  async function likeJourney() {
+    data.isLiked = !data.isLiked;
+    if (data.isLiked) {
+      const res = await axios.post($baseurl + "journey/like-journey", {
+        journeyid: params.id,
+        token: localStorage.getItem("token"),
+      });
+      if (res.data.code === "success") toast.success("Liked!");
+    } else {
+      const res = await axios.post($baseurl + "journey/unlike-journey", {
+        journeyid: params.id,
+        token: localStorage.getItem("token"),
+      });
+    }
+    await fetchData();
+  }
+  async function addComment() {
+    const res = await axios.post($baseurl + "journey/add-comment", {
+      commentcontent: comment,
+      journeyid: params.id,
+      token: localStorage.getItem("token"),
+    });
+    if (res.data.code === "success") {
+      toast.success("Added comment!");
+      comment = "";
+      await fetchData();
+    }
+  }
+
+  async function fetchData() {
+    loading = true;
+    const res = await axios.post($baseurl + "journey/get-journey", {
+      journeyid: params.id,
+      token: localStorage.getItem("token"),
+    });
+    console.log(res.data);
+    data = res.data.data;
+
     if (data.owner.username === localStorage.getItem("username"))
       isOwner = true;
     if (
@@ -98,37 +142,45 @@
     for (const mood of data.mood) {
       data["moodboarddata"][moment(mood.date).date()] = mood.mood;
     }
-    console.log(data.moodboarddata);
-  });
-
-  function likeJourney() {
-    data.isLiked = !data.isLiked;
-    // TODO: update
+    loading = false;
+  }
+  async function verifyJourney() {
+    const res = await axios.post($baseurl + "journey/verify-journey", {
+      tname: data.validity.therapist.name,
+      tno: data.validity.therapist.tno,
+      tcontact: data.validity.therapist.contactLink,
+      journeyid: params.id,
+      token: localStorage.getItem("token"),
+    });
+    if (res.data.code === "success") {
+      toast.success("Verified");
+      await fetchData();
+      isTherapistModalOpen = false;
+    }
   }
 
-  async function fetchData() {
-    const res = await axios.post($baseurl + "get-journey", {
-      journeyid: params.journeyid,
+  async function addStory() {
+    const formData = new FormData();
+    if (storypic) formData.append("img", storypic[0]);
+    formData.append("journeyid", params.id);
+    formData.append("textContent", storyContent);
+    formData.append("token", localStorage.getItem("token"));
+    const res = await axios.post($baseurl + "journey/add-story", formData);
+    if (res.data.code === "success") toast.success("Saved successfully!");
+    await fetchData();
+    isAddModalOpen = false;
+  }
+
+  async function editJourney() {
+    const res = await axios.post($baseurl + "journey/edit-journey", {
+      visibility: data.visibility,
+      sharedWith: data.sharedWith,
+      hasEnded: data.hasEnded,
+      journeyid: params.id,
+      token: localStorage.getItem("token"),
     });
-    if (res && res.data) {
-      // data = res.data;
-      console.log(res.data);
-      const stories = res.data.journey.journeys;
-      const formattedStories = stories.map((story) => {
-        return {
-          date: moment(story.date).format("DD MMMM, YYYY"),
-          content: story.text,
-        };
-      });
-      console.log(formattedStories);
-      data.story = formattedStories;
-      data.hasEnded = res.data.journey.journeyend;
-      data.author = res.data.journey.author;
-      data.title = res.data.journey.title;
-      data.textSummary = res.data.journey.summary;
-    } else {
-      toast.error("Something went terribly wrong. Ahaaaaa!");
-    }
+    if (res.data.code === "success") toast.success("Saved successfully!");
+    await fetchData();
   }
 </script>
 
@@ -143,7 +195,10 @@
     </button>
     <div class="flex flex-col">
       <h3 class="text-lg font-bold">Add a Story to your Journey</h3>
-      <div class="flex flex-col gap-2 my-2">
+      <form
+        on:submit|preventDefault={addStory}
+        class="flex flex-col gap-2 my-2"
+      >
         <div class="mt-3 text-sm opacity-60">Thought Starters:</div>
         <div class="flex text-sm flex-col gap-2">
           <div>> What made you feel nice or sad today?</div>
@@ -160,15 +215,11 @@
           bind:value={storyContent}
         />
         <div class="label-text">Add a picture to this story</div>
-        <input type="file" name="" id="" />
+        <input type="file" bind:files={storypic} name="" id="" />
 
-        <button
-          on:click={() => {
-            // TODO : call update
-          }}
-          class="btn bg-indigo-500 mt-2 text-white">Add to journey</button
+        <button class="btn bg-indigo-500 mt-2 text-white">Add to journey</button
         >
-      </div>
+      </form>
     </div>
   </div>
 </div>
@@ -181,14 +232,16 @@
 <div class="modal modal-bottom sm:modal-middle">
   <div class="modal-box relative ">
     <button
-      on:click={() => (isTherapistDetailModalOpen = false)}
+      on:click={() => {
+        isTherapistDetailModalOpen = false;
+      }}
       class="btn btn-sm btn-circle absolute right-2 top-2"
     >
       ✕
     </button>
     <div class="flex flex-col">
       <h3 class="text-lg font-bold">{data.validity.therapist.name}</h3>
-      <div class="py-4">
+      <div class="py-4 flex flex-col gap-3">
         <div>This article is verified by the above therapist.</div>
         <button
           class="btn btn-outline btn-sm"
@@ -216,7 +269,7 @@
       to verify this journey. If you feel that this journey resonates with you
       and could help others, go ahead and verify it!
     </div>
-    <form class="mt-2">
+    <form on:submit|preventDefault={verifyJourney} class="mt-2">
       <div class="label-text">Your Display name</div>
       <input
         type="text"
@@ -241,12 +294,8 @@
         name=""
         id=""
       />
-      <button
-        on:click={() => {
-          // TODO: call update
-        }}
-        type="submit"
-        class="btn bg-indigo-500 mt-3 w-full border-0">Verify Journey</button
+      <button type="submit" class="btn bg-indigo-500 mt-3 w-full border-0"
+        >Verify Journey</button
       >
     </form>
   </div>
@@ -265,7 +314,7 @@
       ✕
     </button>
     <h3 class="text-lg font-bold">Edit Visibility</h3>
-    <div class="py-4 flex justify-between">
+    <div class="pt-4 flex justify-between">
       <div class="label-text">Make journey private</div>
       <input
         type="checkbox"
@@ -284,6 +333,14 @@
         checked={data.visibility === "private"}
       />
     </div>
+    <div class="py-4 flex justify-between">
+      <div class="label-text">Mark as end</div>
+      <input
+        type="checkbox"
+        class="toggle toggle-sm"
+        bind:checked={data.hasEnded}
+      />
+    </div>
     <h3 class="text-lg font-bold opacity-30">Sharing your journey with...</h3>
 
     <div class="py-2 flex gap-3 flex-wrap">
@@ -297,7 +354,6 @@
             data.sharedWith.push(newusername);
             data.sharedWith = [...data.sharedWith];
             toast.success(newusername + " can now see your journey");
-            // TODO: Call update
           }
         }}
         class="border px-2 py-1 rounded-lg text-sm hover:border-indigo-500 transition-all"
@@ -305,6 +361,9 @@
         ➕
       </button>
     </div>
+    <button on:click={editJourney} class="btn bg-indigo-500 text-white"
+      >Make Changes</button
+    >
   </div>
 </div>
 <section
@@ -342,8 +401,7 @@
     {/if}
 
     {#if isOwner}
-      <div class="divider text-xs">Owner Controls</div>
-      <div class="flex gap-2">
+      <div class="flex gap-2 my-3">
         <button
           on:click={() => (isEditVisibilityModalOpen = true)}
           class="rounded-full px-2 py-1 border-2 w-fit text-xs  border-gray-600"
@@ -366,11 +424,13 @@
   <div class="">
     {#each data.story as d}
       <div class="mt-4">
-        <div class="underline font-bold">{d.date}</div>
-        <div>{d.content}</div>
+        <div class="underline font-bold">
+          {moment(d.timestamp).format("DD MMMM, YYYY")}
+        </div>
+        <div>{d.textContent}</div>
         {#if d.imgurl}
           <img
-            src={d.imgurl}
+            src={$baseurl + "journey/asset/" + d.imgurl}
             class="w-full max-h-48 object-cover mt-2"
             alt=""
           />
@@ -426,7 +486,7 @@
       <Likes likes={data.likes} />
     </div>
     <div class="opacity-50">Public Comments</div>
-    <form class="mt-4">
+    <form on:submit|preventDefault={addComment} class="mt-4">
       <textarea
         bind:value={comment}
         type="text"
@@ -436,13 +496,8 @@
         rows={6}
         id=""
       />
-      <button
-        on:click={() => {
-          // TODO : integration insert
-          // TODO: call update
-        }}
-        class="btn w-full bg-indigo-500 text-white"
-        type="submit">Submit</button
+      <button class="btn w-full bg-indigo-500 text-white" type="submit"
+        >Submit</button
       >
     </form>
 

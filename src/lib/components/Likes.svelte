@@ -7,7 +7,7 @@
     <div class="avatar">
       <div class="w-6">
         <img
-          src={likes[0].imgurl ||
+          src={(likes[0] && likes[0].dp) ||
             "https://avatars.dicebear.com/api/miniavs/11f3.svg"}
         />
       </div>
@@ -15,7 +15,7 @@
     <div class="avatar">
       <div class="w-6">
         <img
-          src={likes[1].imgurl ||
+          src={(likes[1] && likes[1].dp) ||
             "https://avatars.dicebear.com/api/miniavs/11f3.svg"}
         />
       </div>
@@ -23,7 +23,7 @@
     <div class="avatar">
       <div class="w-6">
         <img
-          src={likes[2].imgurl ||
+          src={(likes[2] && likes[2].dp) ||
             "https://avatars.dicebear.com/api/miniavs/11f3.svg"}
         />
       </div>

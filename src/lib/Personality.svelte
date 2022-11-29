@@ -210,7 +210,13 @@
         personalityobj.tf.winner +
         personalityobj.jp.winner
     );
-    // TODO : integration
+    const { data } = await axios.post($baseurl + "user/update-personality", {
+      personality: personalityobj,
+      token: localStorage.getItem("token"),
+    });
+    if (data && data.code === "success") {
+      push("/home");
+    }
   }
 </script>
 
