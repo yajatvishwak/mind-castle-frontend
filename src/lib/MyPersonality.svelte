@@ -56,6 +56,7 @@
         trekking, and meditation are all common pastimes for INTPs.`,
   };
   onMount(() => {
+    personality = personality.toUpperCase();
     //@ts-ignore
     data = getPersonalityData(personality);
   });
