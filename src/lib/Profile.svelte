@@ -117,7 +117,7 @@
 
   <button
     on:click={() => {
-      push("/mypersonality");
+      push("/mypersonality/" + localStorage.getItem("personality"));
     }}
     class="flex mt-4 btn btn-outline gap-3   "
   >
