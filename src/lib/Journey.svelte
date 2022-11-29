@@ -107,16 +107,20 @@
     await fetchData();
   }
   async function addComment() {
-    const res = await axios.post($baseurl + "journey/add-comment", {
-      commentcontent: comment,
-      journeyid: params.id,
-      token: localStorage.getItem("token"),
-    });
-    if (res.data.code === "success") {
-      toast.success("Added comment!");
-      comment = "";
-      await fetchData();
+    loading = true;
+    if (comment) {
+      const res = await axios.post($baseurl + "journey/add-comment", {
+        commentcontent: comment,
+        journeyid: params.id,
+        token: localStorage.getItem("token"),
+      });
+      if (res.data.code === "success") {
+        toast.success("Added comment!");
+        comment = "";
+        await fetchData();
+      }
     }
+    loading = false;
   }
 
   async function fetchData() {
@@ -160,14 +164,17 @@
   }
 
   async function addStory() {
-    const formData = new FormData();
-    if (storypic) formData.append("img", storypic[0]);
-    formData.append("journeyid", params.id);
-    formData.append("textContent", storyContent);
-    formData.append("token", localStorage.getItem("token"));
-    const res = await axios.post($baseurl + "journey/add-story", formData);
-    if (res.data.code === "success") toast.success("Saved successfully!");
-    await fetchData();
+    if (storyContent) {
+      const formData = new FormData();
+      if (storypic) formData.append("img", storypic[0]);
+      formData.append("journeyid", params.id);
+      formData.append("textContent", storyContent);
+      formData.append("token", localStorage.getItem("token"));
+      const res = await axios.post($baseurl + "journey/add-story", formData);
+      if (res.data.code === "success") toast.success("Saved successfully!");
+      await fetchData();
+    }
+
     isAddModalOpen = false;
   }
 
