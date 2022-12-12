@@ -430,11 +430,8 @@
     <div class="divider ">Journey Ends</div>
   {/if}
   <div class="">
-    {#each data.story as d}
+    {#each data.story as d, index}
       <div class="mt-4">
-        <div class="underline font-bold">
-          {moment(d.timestamp).format("DD MMMM, YYYY")}
-        </div>
         <div>{d.textContent}</div>
         {#if d.imgurl}
           <img
@@ -442,6 +439,15 @@
             class="w-full max-h-48 object-cover mt-2"
             alt=""
           />
+        {/if}
+        <div class="opacity-50 mt-4 text-sm">
+          <span class="font-bold"
+            >{moment(d.timestamp).format("h:mm a")}
+          </span>//
+          {moment(d.timestamp).format("DD MMMM, YYYY")}
+        </div>
+        {#if index !== data.story.length - 1}
+          <div class="divider" />
         {/if}
       </div>
     {/each}
