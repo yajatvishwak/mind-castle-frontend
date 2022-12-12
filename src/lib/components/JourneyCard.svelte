@@ -9,6 +9,8 @@
   export let comments = "";
   export let jid = "";
   export let match;
+  export let personality = "";
+  export let userpersonality = "";
 </script>
 
 <!-- svelte-ignore a11y-click-events-have-key-events -->
@@ -34,7 +36,10 @@
       />
     </div>
     <div class="flex justify-between w-full items-center">
-      <div class="font-bold">{username}</div>
+      <div class="flex gap-1">
+        <div class="font-bold">{username}</div>
+        //<span class="opacity-50">{personality}</span>
+      </div>
       <div class="text-xs">{likes} likes, {comments} comments</div>
     </div>
   </div>

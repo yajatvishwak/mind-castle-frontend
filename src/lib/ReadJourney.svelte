@@ -85,6 +85,8 @@
           title={journey.title}
           username={journey.author}
           match={journey.match}
+          personality={journey.personality}
+          userpersonality={localStorage.getItem("personality") || ""}
         />
       {/each}
     {/if}
